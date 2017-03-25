@@ -1,0 +1,72 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{8A8F0745-4283-4FCE-B464-0AEFEF57F027}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="pr-wlx\LookFits.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="pr-pkg\LookFits240.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="pr-app\LookFitsApp.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="pr-dem\LookFitsDem.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="LookFits">
+        <MSBuild Projects="pr-wlx\LookFits.dproj"/>
+    </Target>
+    <Target Name="LookFits:Clean">
+        <MSBuild Projects="pr-wlx\LookFits.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LookFits:Make">
+        <MSBuild Projects="pr-wlx\LookFits.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="LookFits240">
+        <MSBuild Projects="pr-pkg\LookFits240.dproj"/>
+    </Target>
+    <Target Name="LookFits240:Clean">
+        <MSBuild Projects="pr-pkg\LookFits240.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LookFits240:Make">
+        <MSBuild Projects="pr-pkg\LookFits240.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="LookFitsApp">
+        <MSBuild Projects="pr-app\LookFitsApp.dproj"/>
+    </Target>
+    <Target Name="LookFitsApp:Clean">
+        <MSBuild Projects="pr-app\LookFitsApp.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LookFitsApp:Make">
+        <MSBuild Projects="pr-app\LookFitsApp.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="LookFitsDem">
+        <MSBuild Projects="pr-dem\LookFitsDem.dproj"/>
+    </Target>
+    <Target Name="LookFitsDem:Clean">
+        <MSBuild Projects="pr-dem\LookFitsDem.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="LookFitsDem:Make">
+        <MSBuild Projects="pr-dem\LookFitsDem.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="LookFits;LookFits240;LookFitsApp;LookFitsDem"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="LookFits:Clean;LookFits240:Clean;LookFitsApp:Clean;LookFitsDem:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="LookFits:Make;LookFits240:Make;LookFitsApp:Make;LookFitsDem:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
