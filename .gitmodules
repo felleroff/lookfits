@@ -1,0 +1,3 @@
+[submodule "DeLaFits"]
+	path = DeLaFits
+	url = https://github.com/felleroff/delafits.git
