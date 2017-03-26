@@ -15,4 +15,4 @@ Also supported installation using Total Commander's [integrated plugin installer
 ### License
 
 This software is released as freeware.  
-[MIT](https://github.com/felleroff/lookfits/blob/master/LICENSE) © 2017, Evgeniy Dikov
+[MIT](https://github.com/felleroff/lookfits/blob/master/LICENSE) © 2017, Evgeniy Dikov \<delafits.lookfits@gmail.com\>
