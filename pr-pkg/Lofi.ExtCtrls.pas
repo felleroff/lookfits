@@ -5,6 +5,7 @@
 { * Vertical Splitter with the hint about position;    }
 { * TLofiComboBox with OnChangeDone event;             }
 { * TLofiScrollBar with SetParams method;              }
+{ * TLofiTrackBar with OnChangeDone event;             }
 {                                                      }
 {           Copyright(c) 2017, Evgeniy Dikov           }
 {        https://github.com/felleroff/lookfits         }
@@ -16,7 +17,7 @@ interface
 
 uses
   System.SysUtils, System.Classes, System.Types, Winapi.Windows, Vcl.Controls,
-  Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Graphics;
+  Vcl.ExtCtrls, Vcl.StdCtrls, Vcl.ComCtrls, Vcl.Graphics, Vcl.Forms;
 
 type
 
@@ -326,16 +327,17 @@ var
 begin
   Result := inherited;
   if Self is TLofiGroup then
-  begin
-    if WheelDelta < 0 then
-      Delta := -cDelta
-    else if WheelDelta > 0 then
-      Delta := +cDelta
-    else
-      Delta := 0;
-    IncGroupAnchorTop(Delta);
-    Result := True;
-  end;
+    if not (Screen.ActiveControl is TComboBox) then
+    begin
+      if WheelDelta < 0 then
+        Delta := -cDelta
+      else if WheelDelta > 0 then
+        Delta := +cDelta
+      else
+        Delta := 0;
+      IncGroupAnchorTop(Delta);
+      Result := True;
+    end;
 end;
 
 procedure TLofiCustomGroup.MouseDown(Button: TMouseButton; Shift: TShiftState; X, Y: Integer);

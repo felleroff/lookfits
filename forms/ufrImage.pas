@@ -88,6 +88,8 @@ type
     FImgScn: TRgn;
     procedure InitImgScn;
     procedure MatchImgScn;
+    procedure RenderImgScnSel(const ALeft, ATop, AWidth, AHeight: Integer);
+    function GetImgScnSelRect: TRect;
     procedure RenderImgScn1; // render fit-layer
     procedure RenderImgScn2; // render gline-layer
     procedure RenderImgScn3; // render scroll-layer
@@ -768,12 +770,9 @@ begin
   // select
   if ssCtrl in Shift then
   begin
-    P := ImgScn.ClientToParent(Point(X, Y));
-    ImgScnSel.SetBounds(P.X, P.Y, 1, 1);
     ImgScnSel.Tag := 0; // logic of show/hide of ImgScnSel
-    ImgScnSel.Visible := True;
-    ImgScnSelHint.Caption := '1 x 1';
-    ImgScnSelHint.Visible := True;
+    P := ImgScn.ClientToParent(Point(X, Y));
+    RenderImgScnSel(P.X, P.Y, 1, 1);
   end
   // moved
   else
@@ -809,11 +808,12 @@ begin
   begin
     L := ifthen(X < FImgPix.X, X, FImgPix.X);
     T := ifthen(Y < FImgPix.Y, Y, FImgPix.Y);
+    P := ImgScn.ClientToParent(Point(L, T));
+    L := P.X;
+    T := P.Y;
     W := Max(abs(X - FImgPix.X), 1);
     H := Max(abs(Y - FImgPix.Y), 1);
-    ImgScnSel.SetBounds(L, T, W, H);
-    ImgScnSelHint.Caption := Format('%d x %d', [W, H]);
-    ImgScnSelHint.SetBounds(L + W + 2, T + H - ImgScnSelHint.Height, ImgScnSelHint.Width, ImgScnSelHint.Height);
+    RenderImgScnSel(L, T, W, H);
   end;
   // moved
   if ImgScnMov.Visible then
@@ -886,6 +886,24 @@ begin
   end;
   if FUpdates * [deGline, deNavig, deGeom, deTone, dePal, deHim] <> [] then
     Include(FRenders, deImgScn);
+end;
+
+procedure TfrImage.RenderImgScnSel(const ALeft, ATop, AWidth, AHeight: Integer);
+begin
+  ImgScnSel.SetBounds(ALeft, ATop, AWidth, AHeight);
+  ImgScnSelHint.Caption := Format('%d x %d', [AWidth, AHeight]);
+  ImgScnSelHint.SetBounds(ALeft + AWidth + 2, ATop + AHeight - ImgScnSelHint.Height, ImgScnSelHint.Width, ImgScnSelHint.Height);
+  ImgScnSel.Visible := True;
+  ImgScnSelHint.Visible := True;
+end;
+
+function TfrImage.GetImgScnSelRect: TRect;
+var
+  P: TPoint;
+begin
+  Result := ImgScnSel.BoundsRect;
+  P := ImgScn.BoundsRect.TopLeft;
+  Result.Offset(-P.X, -P.Y);
 end;
 
 procedure TfrImage.RenderImgScn1;
@@ -2297,7 +2315,7 @@ begin
   begin
     Bmp := TBitmap.Create;
     Bmp.SetSize(ImgScnSel.Width, ImgScnSel.Height);
-    Bmp.Canvas.CopyRect(ImgScnSel.ClientRect, ImgScn.Picture.Bitmap.Canvas, ImgScnSel.BoundsRect);
+    Bmp.Canvas.CopyRect(ImgScnSel.ClientRect, ImgScn.Picture.Bitmap.Canvas, GetImgScnSelRect);
     Clipboard.Assign(Bmp);
     Bmp.Free;
     ImgScnSel.Visible := False;
@@ -2316,12 +2334,12 @@ end;
 
 procedure TfrImage.SaveOpt;
 const
-  Ext: array [1 .. 2] of string = ('.bmp', '.jpg');
+  Ext: array [1 .. 3] of string = ('.bmp', '.jpg', '.png');
 var
   I, PicType: Integer;
   S, PicName: string;
+  Bmp: TBitmap;
   Pic: TGraphic;
-  PicCanvas: TCanvas;
 begin
   // get picname
   PicName := '';
@@ -2343,46 +2361,46 @@ begin
   end;
   if PicName = '' then
     Exit;
-  // get pictype
-  PicType := 0;
-  S := AnsiLowerCase(ExtractFileExt(PicName));
-  for I := Low(Ext) to High(Ext) do
-    if S = Ext[I] then
-    begin
-      PicType := I;
-      Break;
-    end;
-  if PicType = 0 then
-  begin
-    PicType := FSaveFilterIndex;
-    PicName := PicName + Ext[PicType];
-  end;
-  // create pic
+  Bmp := TBitmap.Create;
   Pic := nil;
-  case PicType of
-    1: Pic := TBitmap.Create;
-    2: Pic := TJPEGImage.Create;
-  end;
   try
+    // make bitmap picture
     if ImgScnSel.Visible then
     begin
-      Pic.SetSize(ImgScnSel.Width, ImgScnSel.Height);
-      PicCanvas := nil;
-      case PicType of
-        1: PicCanvas := TBitmap(Pic).Canvas;
-        2: PicCanvas := TJPEGImage(Pic).Canvas;
-      end;
-      PicCanvas.CopyRect(ImgScnSel.ClientRect, ImgScn.Picture.Bitmap.Canvas, ImgScnSel.BoundsRect);
+      Bmp.SetSize(ImgScnSel.Width, ImgScnSel.Height);
+      Bmp.Canvas.CopyRect(ImgScnSel.ClientRect, ImgScn.Picture.Bitmap.Canvas, GetImgScnSelRect);
       ImgScnSel.Visible := False;
       ImgScnSelHint.Visible := False;
     end
     else
     begin
-      Pic.Assign(ImgScn.Picture.Bitmap);
+      Bmp.Assign(ImgScn.Picture.Bitmap);
     end;
+    // get picture type
+    PicType := 0;
+    S := AnsiLowerCase(ExtractFileExt(PicName));
+    for I := Low(Ext) to High(Ext) do
+      if S = Ext[I] then
+      begin
+        PicType := I;
+        Break;
+      end;
+    if PicType = 0 then
+    begin
+      PicType := FSaveFilterIndex;
+      PicName := PicName + Ext[PicType];
+    end;
+    // create and save picture
+    case PicType of
+      1: Pic := TBitmap.Create;
+      2: Pic := TJPEGImage.Create;
+      3: Pic := TPngImage.Create;
+    end;
+    Pic.Assign(Bmp);
     Pic.SaveToFile(PicName);
     MessageDlg('The image was successfully saved to a file' + sLineBreak + PicName, mtInformation, [mbOK], 0);
   finally
+    Bmp.Free;
     if Assigned(Pic) then
       Pic.Free;
   end;

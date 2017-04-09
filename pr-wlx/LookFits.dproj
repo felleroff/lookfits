@@ -58,6 +58,7 @@
         <Base>true</Base>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base)'!=''">
+        <VerInfo_Release>1</VerInfo_Release>
         <DCC_DcuOutput>.\$(Platform)\$(Config)</DCC_DcuOutput>
         <DCC_Define>PRWLX;$(DCC_Define)</DCC_Define>
         <VerInfo_DLL>true</VerInfo_DLL>
@@ -71,7 +72,7 @@
         <SanitizedProjectName>LookFits</SanitizedProjectName>
         <DCC_ImageBase>00400000</DCC_ImageBase>
         <DCC_N>false</DCC_N>
-        <VerInfo_Keys>CompanyName=;FileDescription=LookFits - Lister plugin (WLX) for view FITS files;FileVersion=1.0.0.0;InternalName=LookFits;LegalCopyright=Evgeniy Dikov, https://github.com/felleroff/lookfits;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0;Comments=;CFBundleName=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=LookFits - Lister plugin (WLX) for view FITS files;FileVersion=1.0.1.0;InternalName=LookFits;LegalCopyright=Evgeniy Dikov, https://github.com/felleroff/lookfits;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.1;Comments=;CFBundleName=</VerInfo_Keys>
         <DCC_F>false</DCC_F>
         <DCC_K>false</DCC_K>
         <DCC_S>false</DCC_S>
@@ -81,15 +82,14 @@
         <OutputExt>wlx</OutputExt>
         <Manifest_File>(None)</Manifest_File>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;Bde;$(DCC_Namespace)</DCC_Namespace>
-        <VerInfo_Keys>CompanyName=;FileDescription=LookFits - Lister plugin (WLX) for view FITS files;FileVersion=1.0.0.0;InternalName=LookFits;LegalCopyright=Evgeniy Dikov, https://github.com/felleroff/lookfits;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=LookFits - Lister plugin (WLX) for view FITS files;FileVersion=1.0.1.0;InternalName=LookFits;LegalCopyright=Evgeniy Dikov, https://github.com/felleroff/lookfits;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.1;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Base_Win64)'!=''">
         <OutputExt>wlx64</OutputExt>
         <Manifest_File>(None)</Manifest_File>
-        <VerInfo_PreRelease>true</VerInfo_PreRelease>
         <DCC_Namespace>Winapi;System.Win;Data.Win;Datasnap.Win;Web.Win;Soap.Win;Xml.Win;$(DCC_Namespace)</DCC_Namespace>
-        <VerInfo_Keys>CompanyName=;FileDescription=LookFits - Lister plugin (WLX) for view FITS files;FileVersion=1.0.0.0;InternalName=LookFits;LegalCopyright=Evgeniy Dikov, https://github.com/felleroff/lookfits;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=LookFits - Lister plugin (WLX) for view FITS files;FileVersion=1.0.1.0;InternalName=LookFits;LegalCopyright=Evgeniy Dikov, https://github.com/felleroff/lookfits;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.1;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1)'!=''">
@@ -99,14 +99,13 @@
         <DCC_Define>RELEASE;$(DCC_Define)</DCC_Define>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win32)'!=''">
-        <VerInfo_Build>6</VerInfo_Build>
-        <VerInfo_Keys>CompanyName=;FileDescription=LookFits - Lister plugin (WLX) for view FITS files;FileVersion=1.0.0.6;InternalName=LookFits;LegalCopyright=Evgeniy Dikov, https://github.com/felleroff/lookfits;LegalTrademarks=;OriginalFilename=LookFits.wlx;ProductName=;ProductVersion=1.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Build>8</VerInfo_Build>
+        <VerInfo_Keys>CompanyName=;FileDescription=LookFits - Lister plugin (WLX) for view FITS files;FileVersion=1.0.1.8;InternalName=LookFits;LegalCopyright=Evgeniy Dikov, https://github.com/felleroff/lookfits;LegalTrademarks=;OriginalFilename=LookFits.wlx;ProductName=;ProductVersion=1.0.1;Comments=</VerInfo_Keys>
         <VerInfo_Locale>1033</VerInfo_Locale>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
-        <VerInfo_PreRelease>true</VerInfo_PreRelease>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=LookFits - Lister plugin (WLX) for view FITS files;FileVersion=1.0.0.0;InternalName=LookFits;LegalCopyright=Evgeniy Dikov, https://github.com/felleroff/lookfits;LegalTrademarks=;OriginalFilename=LookFits.wlx64;ProductName=;ProductVersion=1.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=LookFits - Lister plugin (WLX) for view FITS files;FileVersion=1.0.1.0;InternalName=LookFits;LegalCopyright=Evgeniy Dikov, https://github.com/felleroff/lookfits;LegalTrademarks=;OriginalFilename=LookFits.wlx64;ProductName=;ProductVersion=1.0.1;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_GenerateStackFrames>true</DCC_GenerateStackFrames>
@@ -117,12 +116,11 @@
         <VerInfo_Build>2</VerInfo_Build>
         <Debugger_HostApplication>C:\Program Files\totalcmd\TOTALCMD.EXE</Debugger_HostApplication>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=LookFits - Lister plugin (WLX) for view FITS files;FileVersion=1.0.0.2;InternalName=LookFits;LegalCopyright=Evgeniy Dikov, https://github.com/felleroff/lookfits;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=LookFits - Lister plugin (WLX) for view FITS files;FileVersion=1.0.1.2;InternalName=LookFits;LegalCopyright=Evgeniy Dikov, https://github.com/felleroff/lookfits;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.1;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2_Win64)'!=''">
-        <VerInfo_PreRelease>true</VerInfo_PreRelease>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=;FileDescription=LookFits - Lister plugin (WLX) for view FITS files;FileVersion=1.0.0.0;InternalName=LookFits;LegalCopyright=Evgeniy Dikov, https://github.com/felleroff/lookfits;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=;FileDescription=LookFits - Lister plugin (WLX) for view FITS files;FileVersion=1.0.1.0;InternalName=LookFits;LegalCopyright=Evgeniy Dikov, https://github.com/felleroff/lookfits;LegalTrademarks=;OriginalFilename=;ProductName=;ProductVersion=1.0.1;Comments=</VerInfo_Keys>
     </PropertyGroup>
     <ItemGroup>
         <DelphiCompile Include="$(MainSource)">
