@@ -13,6 +13,8 @@ Lister-plugin (WLX) a [Total Commander](https://www.ghisler.com) and [Double Com
 Download the [current stable release](https://github.com/felleroff/lookfits/releases/latest), unzip it and plug in the plugin LookFits.wlx or LookFits.wlx64.<br />
 Also supported installation using Total Commander's [integrated plugin installer](http://www.ghisler.ch/wiki/index.php/Plugin#Manual_installation_of_plugins).
 
+A video-presentation [is available](https://youtu.be/b401TmeLbj4) on YouTube.
+
 ![LookFits screenshots](LookFits.gif)
 
 ### License
